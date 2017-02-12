@@ -10,6 +10,7 @@ class NYTimesReviewCLI
   end
 
   def run
+    print "Plea"
     print "Use the keys on your keyboard to type a film you've been dying to see, or type 'help' if you need some help." "\n" + "\n"
     input = get_user_input
     if input == "help"

@@ -24,4 +24,4 @@ class ReviewAPI
       end
   end
 
-   end
+end
