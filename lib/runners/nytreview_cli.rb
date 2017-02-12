@@ -10,7 +10,7 @@ class ReviewCLI
   end
 
   def run
-    puts "Use your keyboard to type a film you've been dying to see, or type 'help' if you need some help."
+    puts "Use your keyboard to type a film you've been dying to see, or type a director's name to view his/her oeuvre, or type 'help' if you need some help."
     puts "You can also narrow your search by typing between 'single quotes'." + "\n" + "\n"
     input = get_user_input
     if input == "help"
@@ -33,7 +33,6 @@ class ReviewCLI
   def help
     puts "Type 'exit' to exit"
     puts "Type 'help' to view this menu again"
-    puts "Type anything else to search for a year's worth of Critics' Picks"
   end
 
   def open_url
