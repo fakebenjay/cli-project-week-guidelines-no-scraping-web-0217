@@ -1,2 +1,5 @@
 1.) Change initial puts to include that it is both a trivia and film Finder
 2.) In run -- 'Please select from the following options: Trivia/Film Finder'. Change ELSIF line 19 to be an else, add in another else condition with a trivia module.
+earliest year 1970
+
+string.split.map {|word| word.capitalize}.join(" ")
