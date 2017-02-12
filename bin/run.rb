@@ -1,3 +1,3 @@
 require_relative '../config/environment'
 
-NYTimesReviewCLI.new.call
+ReviewCLI.new.call

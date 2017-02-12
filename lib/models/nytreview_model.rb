@@ -26,6 +26,4 @@ class Model
     puts "Read more here: #{@review_url}" + "\n" + "\n"
   end
 
-
-
 end
