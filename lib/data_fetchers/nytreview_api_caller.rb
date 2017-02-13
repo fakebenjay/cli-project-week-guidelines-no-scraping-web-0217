@@ -10,16 +10,16 @@ class ReviewAPI
     result = JSON.parse(RestClient.get(@search_url).body)
     user_input = 0
       if result["results"].count == 1
-        Model.new(result["results"][0]["display_title"],result["results"][0]["mpaa_rating"],result["results"][0]["critics_pick"],result["results"][0]["byline"],result["results"][0]["summary_short"],result["results"][0]["link"]["url"],result["results"][0]["opening_date"]).display_information
+        Model.new(result["results"][0]["display_title"],result["results"][0]["mpaa_rating"],result["results"][0]["critics_pick"],result["results"][0]["byline"],result["results"][0]["summary_short"],result["results"][0]["link"]["url"], result["results"][0]["opening_date"]).display_information
       elsif result["results"].count > 1 && !result["has_more"]
         puts "We found a few movies that matched your search:"
           result["results"].each_with_index do |movie,index|
             puts "#{index + 1}. #{movie["display_title"]}"
           end
-            puts "Please enter the number associated with the correct movie"
+            puts "\n \nPlease enter the number associated with the correct movie"
             user_input = gets.chomp.to_i
             user_input -= 1
-            Model.new(result["results"][user_input]["display_title"],result["results"][user_input]["mpaa_rating"],result["results"][user_input]["critics_pick"],result["results"][user_input]["byline"],result["results"][user_input]["summary_short"],result["results"][user_input]["link"]["url"],result["results"][user_input]["opening_date"]).display_information
+            Model.new(result["results"][user_input]["display_title"],result["results"][user_input]["mpaa_rating"],result["results"][user_input]["critics_pick"],result["results"][user_input]["byline"],result["results"][user_input]["summary_short"],result["results"][user_input]["link"]["url"], result["results"][user_input]["opening_date"]).display_information
         elsif
         puts "We could not find any matches, please try again"
       else
@@ -29,11 +29,11 @@ class ReviewAPI
 
   def trivia
     result = JSON.parse(RestClient.get(@search_url).body)
-    4.times do
-      search_index = rand(20)
-      Model.new(result["results"][search_index]["display_title"],result["results"][search_index]["mpaa_rating"],result["results"][search_index]["critics_pick"],result["results"][search_index]["byline"],result["results"][search_index]["summary_short"],"test url",result["results"][search_index]["opening_date"]).populating_trivia_array
+      until Model.trivia_hash.length == 4 && !Model.trivia_hash.values.include?(nil) && Model.trivia_hash.values.uniq.length == 1
+       search_index = rand(0..19)
+      Model.new(result["results"][search_index]["display_title"],result["results"][search_index]["mpaa_rating"],result["results"][search_index]["critics_pick"],result["results"][search_index]["byline"],result["results"][search_index]["summary_short"],"test url",result["results"][search_index]["opening_date"]).populating_trivia_hash
     end
-    binding.pry
+    Model.play_trivia
   end
 
 end
