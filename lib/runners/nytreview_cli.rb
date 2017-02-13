@@ -1,6 +1,6 @@
 class ReviewCLI
   def call
-    puts "\nCheck it, dis is a hip new app from da NY Timezzzz\n\n"
+    print_nyt_logo
     sleep(0.5)
     run
   end
@@ -63,5 +63,31 @@ class ReviewCLI
       print "-"
     end
   end
+
+  def print_nyt_logo
+    puts "
+
+                  `:+@@@@#':.          @'`
+                :@#@@@@@@@@@##@@#;,..,+@@#@
+               @@@@######@@@@@@@@@@##@@@@@@
+              .#@@:`   `.:'#@@##@@@@@@@@@;
+               ,@,     `:,     .:+@@@+:,
+                    ,#@`    .;#`    `
+                  +@@` .;@@##@@`   ``
+                +#@@:.  ,@@@@@#    ``
+               @@@@,    :@@@@@#   ;@@+`
+              @@@@#`    ;@@@@@#  .@##@'.
+             ,@@@@@,    '@@@@@#    ..
+             ;@@@@@@    +@@@@#@    ``
+             `#@@@@@#   +#@',      ``    +
+              '@@@@@@@:;.          `` `+##
+               ;#@@@@@@@:          `,@#@@
+                `@#@@@@@@#@@+;:;;#@@@@#+
+                  `'@#@@@@@@@@@@@@@#@+
+                      ,'@@@@@@@@@+:`
+
+        NYTimes.com: all the code that's fit to puts"
+        puts ""
+      end
 
 end
