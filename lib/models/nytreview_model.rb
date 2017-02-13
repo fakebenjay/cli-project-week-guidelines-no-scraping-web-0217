@@ -49,6 +49,7 @@ class Model
   def self.play_trivia
     movie_titles = @@trivia_hash.keys
     @@opening_years = @@trivia_hash.values
+    @@correct_answer = @@opening_years[0]
     puts "\n \nCan you guess what year the movies below came out?\n\n"
       movie_titles.map.with_index(1) do |title, index|
         puts "#{index}. #{title}"
@@ -104,14 +105,14 @@ class Model
 
     def self.ensure_quiz_years_unique
       @@quiz_years = self.populate_quiz_years_array
-      until @@quiz_years.uniq.length == 4
+      until @@quiz_years.uniq.length == 4 && quiz_years.include?(@@correct_answer)
         @@quiz_years = self.populate_quiz_years_array
       end
       @@quiz_years
     end
 
     def self.play_again?
-      puts "Please select from the following options:\n1. Play Again\n2. Main Menu"
+      puts "Please select from the following options:\n1. Play Again\n2. Main Menu\n3. Exit"
       user_choice = gets.chomp
      if user_choice.to_s.downcase == "play again" || user_choice.to_i == 1
         @@trivia_hash = {}
@@ -120,6 +121,8 @@ class Model
         ReviewCLI.trivia
      elsif user_choice.to_s.downcase == "main menu"|| user_choice.to_i == 2
         ReviewCLI.new
+      elsif user_choice.to_s.downcase == 'exit' || user_choice.to_i == 3
+        exit
       else
         "Please enter a valid response."
       end
