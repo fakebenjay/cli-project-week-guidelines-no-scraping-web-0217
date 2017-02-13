@@ -59,6 +59,7 @@ class ReviewAPI
        search_index = rand(0..19)
       Model.new(result["results"][search_index]["display_title"],result["results"][search_index]["publication_date"],result["results"][search_index]["mpaa_rating"],result["results"][search_index]["critics_pick"],result["results"][search_index]["byline"],result["results"][search_index]["summary_short"],result["results"][search_index]["link"]["url"], result["results"][search_index]["opening_date"]).populating_trivia_hash
       Timeout::timeout(3) do
+        puts "timeout"
         self
       end
       end

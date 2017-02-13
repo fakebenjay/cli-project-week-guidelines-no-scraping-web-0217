@@ -1,6 +1,6 @@
 class ReviewCLI
   def call
-    puts "\nCheck it, dis is da NY Times Film Review Finder" + "\n"
+    puts "\nCheck it, dis is a hip new app from da NY Timezzzz\n\n"
     sleep(0.5)
     run
   end
@@ -10,7 +10,10 @@ class ReviewCLI
   end
 
   def run
-    print "\nTo search the NY Times archive for a movie review, please enter '1'. If you'd like to play 'Guess That Year', please enter '2'. For assistance, enter 'help'. Exit will take you out of this app.\n \n"
+    puts "To search the NY Times archive for a movie review, please enter '1'."
+    puts "If you'd like to play 'Guess That Year', please enter '2'."
+    puts "For assistance, enter 'help'."
+    puts "'Exit' will take you out of this app.\n \n"
     input = get_user_input
     if input == "help"
       help
