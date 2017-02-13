@@ -36,6 +36,7 @@ class Model
     puts "Reviewer: #{@byline}" + "\n"
     puts "Synopsis: #{@short_summary}" + "\n"
     puts "Read more here: #{@review_url}" + "\n" + "\n"
+    # puts "To open the NYTimes review of this film in your browser, type 'open'." + "\n" + "\n"
   end
 
   def populating_trivia_hash
@@ -62,7 +63,6 @@ class Model
       self.are_they_right?
   end
 
-
     def self.are_they_right?
       @@correct_answer = @@opening_years[0]
       puts "\nPlease type in the year you believe these movies opened in theatres:\n \n"
@@ -79,8 +79,6 @@ class Model
           self.data_validator_and_response(user_selection)
         end
     end
-
-
 
     def self.populate_quiz_years_array
       @@opening_years.map.with_index(1) do |year, index|

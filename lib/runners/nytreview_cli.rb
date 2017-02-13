@@ -13,7 +13,7 @@ class ReviewCLI
     puts "To search the NY Times archive for a movie review, please enter '1'."
     puts "If you'd like to play 'Guess That Year', please enter '2'."
     puts "For assistance, enter 'help'."
-    puts "'Exit' will take you out of this app.\n \n"
+    puts "Typing 'exit' will take you out of this app.\n \n"
     input = get_user_input
     if input == "help"
       help
@@ -21,7 +21,9 @@ class ReviewCLI
       exit
     elsif input.to_i == 1
       puts ""
-      puts "Use your keyboard to type a film you've been dying to see, or type a director's name to view his/her oeuvre, or type 'help' if\nyou need some help. You can also narrow your search by typing between 'single quotes'." + "\n" + "\n"
+      puts "Use your keyboard to type a film you've been dying to see, or type a director's name to view his/her oeuvre,"
+      puts "or type 'help' if you need some help."
+      puts "You can also narrow your search by typing between 'single quotes'." + "\n" + "\n"
       puts ""
       second_input = get_user_input
       search(second_input)
@@ -51,10 +53,6 @@ class ReviewCLI
   def help
     puts "Type 'exit' to exit"
     puts "Type 'help' to view this menu again"
-  end
-
-  def open_url
-    ReviewAPI.new(@search_url).launch_url
   end
 
   def print_line
