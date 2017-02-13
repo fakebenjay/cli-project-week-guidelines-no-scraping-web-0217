@@ -70,7 +70,7 @@ class ReviewCLI
         sleep(1)
         puts "If that's correct, press 1."
         input = gets.chomp
-        if input == 1 || input == "one"
+        if input == "1" || input == "one"
           search('X-Men Origins: Wolverine')
         else
           sleep(1)
@@ -84,7 +84,7 @@ class ReviewCLI
           sleep(1)
           puts "If this is correct, press 1."
           input = gets.chomp
-          if input == 1 || input == "one"
+          if input == "1" || input == "one"
             search('The Big Chill')
           else
             sleep(1)
@@ -120,7 +120,7 @@ class ReviewCLI
     puts ""
     puts "#{input.split.map {|word| word.capitalize}.join(" ")} is playing at the Paragon 84th Street cinema in the main theater at 9:30pm."
     sleep(1)
-    puts "It's also pleaying in theatre #2 at 9:30pm."
+    puts "It's also pleaying in theatre #2 at 9:30pm." + "\n" + "\n"
     @search_url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=d53798cfd74849ef8afddd4882a4ebc0&query=#{search_term}"
     ReviewAPI.new(@search_url).make_movies
   end
