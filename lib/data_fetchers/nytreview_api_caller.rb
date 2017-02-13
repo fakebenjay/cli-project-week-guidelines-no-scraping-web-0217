@@ -33,6 +33,7 @@ class ReviewAPI
       end
       puts "\n"
       puts "Please enter the number associated with the correct movie."
+      puts ""
       puts "Or to narrow your search to a specific title, please retype your search query between 'single quotes'."
       user_input = gets.chomp.to_i
       user_input -= 1

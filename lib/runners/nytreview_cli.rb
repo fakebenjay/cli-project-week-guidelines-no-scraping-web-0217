@@ -1,5 +1,3 @@
-require 'timeout'
-
 class ReviewCLI
   def call
     puts "\nCheck it, dis is da NY Times Film Review Finder" + "\n"
@@ -19,22 +17,25 @@ class ReviewCLI
     elsif input == "exit"
       exit
     elsif input.to_i == 1
-      puts "Use your keyboard to type a film you've been dying to see, or type a director's name to view his/her oeuvre, or type 'help' if you need some help."
-      puts "You can also narrow your search by typing between 'single quotes'." + "\n" + "\n"
+      puts ""
+      puts "Use your keyboard to type a film you've been dying to see, or type a director's name to view his/her oeuvre, or type 'help' if\nyou need some help. You can also narrow your search by typing between 'single quotes'." + "\n" + "\n"
+      puts ""
       second_input = get_user_input
       search(second_input)
     elsif input.to_i == 2
       print "\nBooyakasha, let's go ahead and test that knowledge now, shall we?"
+      print_line
       ReviewCLI.trivia
     else
       "Please enter a valid input"
     end
-    run
+    self.run
   end
 
   def search(input)
     search_term = input.split.join("+")
-    puts "I am now scanning the world wide web for #{input}. Respec." +  "\n" + "\n"
+    puts ""
+    puts "I am now scanning the world wide web for #{input.split.map {|word| word.capitalize}.join(" ")}. Respec." +  "\n" + "\n"
     @search_url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=d53798cfd74849ef8afddd4882a4ebc0&query=#{search_term}"
     ReviewAPI.new(@search_url).make_movies
   end
@@ -52,4 +53,12 @@ class ReviewCLI
   def open_url
     ReviewAPI.new(@search_url).launch_url
   end
+
+  def print_line
+    puts ""
+    139.times do
+      print "-"
+    end
+  end
+
 end
