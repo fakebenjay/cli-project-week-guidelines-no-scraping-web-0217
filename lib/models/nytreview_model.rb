@@ -36,7 +36,8 @@ class Model
     puts "Reviewer: #{@byline}" + "\n"
     puts "Synopsis: #{@short_summary}" + "\n"
     puts "Read more here: #{@review_url}" + "\n" + "\n"
-    # puts "To open the NYTimes review of this film in your browser, type 'open'." + "\n" + "\n"
+    puts "To open the NYTimes review of this film in your browser, type 'open'."
+    puts "To return to the main menu, hit Enter/Return" + "\n" + "\n"
   end
 
   def populating_trivia_hash

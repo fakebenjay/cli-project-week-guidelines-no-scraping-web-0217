@@ -24,9 +24,14 @@ class ReviewAPI
     result = @movies_data
     user_input = gets.chomp
     user_input_int = user_input.to_i
-    user_input_int -= 1
     if user_input_int.between?(1, 20)
-      Model.new(result["results"][user_input_int]["display_title"],result["results"][user_input_int]["publication_date"],result["results"][user_input_int]["mpaa_rating"],result["results"][user_input_int]["critics_pick"],result["results"][user_input_int]["byline"],result["results"][user_input_int]["summary_short"],result["results"][user_input_int]["link"]["url"],result["results"][user_input_int]["opening_date"]).display_information
+      user_input_int -= 1
+      mod = Model.new(result["results"][user_input_int]["display_title"],result["results"][user_input_int]["publication_date"],result["results"][user_input_int]["mpaa_rating"],result["results"][user_input_int]["critics_pick"],result["results"][user_input_int]["byline"],result["results"][user_input_int]["summary_short"],result["results"][user_input_int]["link"]["url"],result["results"][user_input_int]["opening_date"])
+      mod.display_information
+      show = gets.chomp
+      if show == "open"
+        system("open #{mod.review_url}")
+      end
     elsif user_input == "exit"
       exit
     else
@@ -38,7 +43,12 @@ class ReviewAPI
     user_input = 0
     result = @movies_data
     if result["results"].count == 1
-      Model.new(result["results"][0]["display_title"],result["results"][0]["publication_date"],result["results"][0]["mpaa_rating"],result["results"][0]["critics_pick"],result["results"][0]["byline"],result["results"][0]["summary_short"],result["results"][0]["link"]["url"], result["results"][0]["opening_date"]).display_information
+      mod = Model.new(result["results"][0]["display_title"],result["results"][0]["publication_date"],result["results"][0]["mpaa_rating"],result["results"][0]["critics_pick"],result["results"][0]["byline"],result["results"][0]["summary_short"],result["results"][0]["link"]["url"], result["results"][0]["opening_date"])
+      mod.display_information
+      show = gets.chomp
+      if show == "open"
+        system("open #{mod.review_url}")
+      end
     elsif result["results"].count > 1 && !result["has_more"]
       puts "We found a few movies that matched your search." + "\n"
       movies_list
