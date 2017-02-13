@@ -20,9 +20,7 @@ class Model
   end
 
   def display_information
-    puts ""
-    puts "Booyakasha" + "\n" + "\n"
-    139.times do
+    100.times do
       print "-"
     end
     puts ""
