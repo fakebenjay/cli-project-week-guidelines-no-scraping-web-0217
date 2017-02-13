@@ -65,7 +65,6 @@ class Model
 
 
     def self.are_they_right?
-      @@correct_answer = @@opening_years[0]
       puts "\nPlease type in the year you believe these movies opened in theatres:\n \n"
       user_selection = gets.chomp.strip
       user_selection = user_selection.to_i
@@ -105,7 +104,7 @@ class Model
 
     def self.ensure_quiz_years_unique
       @@quiz_years = self.populate_quiz_years_array
-      until @@quiz_years.uniq.length == 4 && quiz_years.include?(@@correct_answer)
+      until @@quiz_years.uniq.length == 4 && @@quiz_years.include?(@@correct_answer)
         @@quiz_years = self.populate_quiz_years_array
       end
       @@quiz_years
