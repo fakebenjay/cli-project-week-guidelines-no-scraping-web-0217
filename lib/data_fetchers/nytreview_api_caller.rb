@@ -54,15 +54,24 @@ class ReviewAPI
 
   def trivia
     result = JSON.parse(RestClient.get(@search_url).body)
-      until Model.trivia_hash.length == 4 && !Model.trivia_hash.values.include?(nil) && Model.trivia_hash.values.uniq.length == 1
-       search_index = rand(0..19)
-      Model.new(result["results"][search_index]["display_title"],result["results"][search_index]["publication_date"],result["results"][search_index]["mpaa_rating"],result["results"][search_index]["critics_pick"],result["results"][search_index]["byline"],result["results"][search_index]["summary_short"],result["results"][search_index]["link"]["url"], result["results"][search_index]["opening_date"]).populating_trivia_hash
-      Timeout::timeout(3) do
-        puts "timeout"
-        self
+    retries = 5
+    begin
+      Timeout::timeout(10) do
+          until Model.trivia_hash.length == 4 && !Model.trivia_hash.values.include?(nil) && Model.trivia_hash.values.uniq.length == 1
+            search_index = rand(0..19)
+            Model.new(result["results"][search_index]["display_title"],result["results"][search_index]["publication_date"],result["results"][search_index]["mpaa_rating"],result["results"][search_index]["critics_pick"],result["results"][search_index]["byline"],result["results"][search_index]["summary_short"],result["results"][search_index]["link"]["url"], result["results"][search_index]["opening_date"]).populating_trivia_hash
+          end
+    end
+      rescue Timeout::Error
+        if retries > 0
+          retries -= 1
+          retry
+        else
+          puts "ERROR: ABORTING PROGRAM. PLEASE RESTART TO CONTINUE HAVING FUN"
+          exit
+        end
       end
-      end
-    Model.play_trivia
+      Model.play_trivia
   end
 
 end
