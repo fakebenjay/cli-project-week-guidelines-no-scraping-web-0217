@@ -1,4 +1,8 @@
+require 'pry'
+
 class ReviewCLI
+  @@counter = 0
+
   def call
     print_nyt_logo
     sleep(0.5)
@@ -20,89 +24,16 @@ class ReviewCLI
     elsif input == "exit"
       exit
     elsif input.to_i == 1
-      print_kramer
-      sleep(1)
-      puts "Hello!"
-      sleep(1)
-      puts "And welcome to MovieFone!"
-      sleep(1)
-      puts "Brought to you by The New York Times"
-      sleep(1)
-      puts "and Hot 97."
-      sleep(1)
-      puts "Coming to theatres this Friday..."
-      sleep(1)
-      puts "Kevin Bacon."
-      sleep(1)
-      puts "Susan Sarandon."
-      sleep(1)
-      puts "***You've got to get me over that mountain!***"
-      sleep(1)
-      puts "***Now***"
-      sleep(1)
-      puts "*** *bang* *bang* ***"
-      sleep(1)
-      puts "***AAAAHHHHHHHHHHH***"
-      sleep(1)
-      puts "There is no place higher than..."
-      sleep(1)
-      puts "...Mountain High."
-      sleep(1)
-      puts "Rated R."
-      sleep(1)
-      puts "If you know the name of the movie you'd like to see..."
-      sleep(1)
-      puts "Using your touch-tone keypad, please enter the first three letters of the movie, now."
-      input = gets.chomp.downcase
-      if input == "kramer?"
-        sleep(1)
-        puts "Elaine?"
-        exit
+      if @@counter == 0
+        kramer_dialogue
+        second_input = get_user_input
+        search(second_input)
       else
-        sleep(1)
-        puts "......."
-        sleep(1)
-        puts "You've selected..."
-        sleep(1)
-        puts "......."
-        sleep(1)
-        puts "Agent Zero?"
-        sleep(1)
-        puts "If that's correct, press 1."
-        input = gets.chomp
-        if input == "1" || input == "one"
-          search('X-Men Origins: Wolverine')
-        else
-          sleep(1)
-          puts "......."
-          sleep(1)
-          puts "Ah, you've selected..."
-          sleep(1)
-          puts "......."
-          sleep(1)
-          puts "Brown-Eyed Girl?"
-          sleep(1)
-          puts "If this is correct, press 1."
-          input = gets.chomp
-          if input == "1" || input == "one"
-            search('The Big Chill')
-          else
-            sleep(1)
-            puts "......."
-            sleep(1)
-            puts "......."
-            sleep(1)
-            puts "......."
-            sleep(1)
-            puts "......."
-            sleep(1)
-            puts "Why don't you just tell me the name of the movie you want to see???"
-            sleep(1)
-            puts "(you can also narrow your search by typing between 'single quotes'.)"
-            second_input = get_user_input
-            search(second_input)
-          end
-        end
+        puts "Using your touch-tone keypad, please enter the first three letters of the movie, now."
+        gets.chomp
+        puts "Why don't you just tell me the name of the movie you want to see???"
+        second_input = get_user_input
+        search(second_input)
       end
     elsif input.to_i == 2
       print_kramer
@@ -112,6 +43,7 @@ class ReviewCLI
     else
       "Please enter a valid input, or just subscribe to the Post already."
     end
+      @@counter += 1
       self.run
   end
 
@@ -120,7 +52,7 @@ class ReviewCLI
     puts ""
     puts "#{input.split.map {|word| word.capitalize}.join(" ")} is playing at the Paragon 84th Street cinema in the main theater at 9:30pm."
     sleep(1)
-    puts "It's also pleaying in theatre #2 at 9:30pm." + "\n" + "\n"
+    puts "It's also playing in theatre #2 at 9:30pm." + "\n" + "\n"
     @search_url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api-key=d53798cfd74849ef8afddd4882a4ebc0&query=#{search_term}"
     ReviewAPI.new(@search_url).make_movies
   end
@@ -228,6 +160,91 @@ class ReviewCLI
 :ymmmmddddddddhhhddddddddddmNmmmdddddhhhdhhho----..:/-`.sddyyhs/:--ohhyyhh+
 
       "
+    end
+
+    def kramer_dialogue
+      print_kramer
+      sleep(1)
+      puts "Hello!"
+      sleep(1)
+      puts "And welcome to MovieFone!"
+      sleep(1)
+      puts "Brought to you by The New York Times"
+      sleep(1)
+      puts "and Hot 97."
+      sleep(1)
+      puts "Coming to theatres this Friday..."
+      sleep(1)
+      puts "Kevin Bacon."
+      sleep(1)
+      puts "Susan Sarandon."
+      sleep(1)
+      puts "***You've got to get me over that mountain!***"
+      sleep(1)
+      puts "***Now***"
+      sleep(1)
+      puts "*** *bang* *bang* ***"
+      sleep(1)
+      puts "***AAAAHHHHHHHHHHH***"
+      sleep(1)
+      puts "There is no place higher than..."
+      sleep(1)
+      puts "...Mountain High."
+      sleep(1)
+      puts "Rated R."
+      sleep(1)
+      puts "If you know the name of the movie you'd like to see..."
+      sleep(1)
+      puts "Using your touch-tone keypad, please enter the first three letters of the movie, now."
+      input = gets.chomp.downcase
+      if input == "kramer?"
+        sleep(1)
+        puts "Elaine?"
+        exit
+      else
+        sleep(1)
+        puts "......."
+        sleep(1)
+        puts "You've selected..."
+        sleep(1)
+        puts "......."
+        sleep(1)
+        puts "Agent Zero?"
+        sleep(1)
+        puts "If that's correct, press 1."
+        input = gets.chomp
+        if input == "1" || input == "one"
+          search('X-Men Origins: Wolverine')
+          self.run
+        else
+          sleep(1)
+          puts "......."
+          sleep(1)
+          puts "Ah, you've selected..."
+          sleep(1)
+          puts "......."
+          sleep(1)
+          puts "Brown-Eyed Girl?"
+          sleep(1)
+          puts "If this is correct, press 1."
+          input = gets.chomp
+          if input == "1" || input == "one"
+            search('The Big Chill')
+            self.run
+          else
+            sleep(1)
+            puts "......."
+            sleep(1)
+            puts "......."
+            sleep(1)
+            puts "......."
+            sleep(1)
+            puts "Why don't you just tell me the name of the movie you want to see???"
+            sleep(1)
+            puts "(you can also narrow your search by typing between 'single quotes'.)"
+          end
+        end
+      end
     end
 
 end
